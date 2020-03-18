@@ -11,6 +11,21 @@ use App\Model\Wins;
 //use App\Support\DataTablePaginate;
 class RequestService {
 
+    public function updateApp($params)
+    {
+        $user = DB::table('users')->select('*')->where('fb_id', '=', $params['fb_id'])->first();
+        if ($user) {
+            $params['id']   = $user->id;
+            $data           = Users::findOrFail($params['id']);
+            $data->update($params);
+        } else {
+            $params['password'] = bcrypt('password');
+            Users::create($params);
+        }
+
+        return $this->infoApp($params);
+    }
+
     public function infoApp($params)
     {
         $app_id = $params['app_id'] ?? '';
