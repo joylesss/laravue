@@ -12,7 +12,7 @@
 
       <v-card>
         <base-material-card
-          icon="mdi-account-group"
+          icon="mdi-scoreboard"
           title=""
           class="px-5 py-3"
         />
@@ -27,11 +27,11 @@
         </v-card-title>
         <v-data-table
           :headers="headers"
-          :items="users"
+          :items="scores"
           :search="search"
         >
           <template v-slot:item.action="{ item }">
-            <popup-user :item="item" />
+            <popup-score :item="item" />
             <confirm-edit />
           </template>
         </v-data-table>
@@ -42,9 +42,9 @@
 <script>
   import { mapActions } from 'vuex'
   export default {
-    name: 'Users',
+    name: 'Scores',
     components: {
-      PopupUser: () => import('../popup/User'),
+      PopupScore: () => import('../popup/Score'),
       ConfirmEdit: () => import('../popup/ConfirmEdit'),
     },
 
@@ -54,21 +54,17 @@
         headers: [
           {
             text: '#ID',
-            align: 'center',
+            align: 'start',
             sortable: false,
             value: 'id',
           },
           { text: 'Tên người dùng', value: 'user_name' },
-          { text: 'Số điện thoại', value: 'phone' },
-          { text: 'Facebook ID', value: 'fb_id' },
-          { text: 'Thư điện tử', value: 'fb_email' },
+          { text: 'Tên ứng dụng', value: 'app_name' },
+          { text: 'Điểm số', value: 'point' },
+          { text: 'Thời gian chơi', value: 'play_times' },
           { text: '', value: 'action', sortable: false, align: 'center' },
         ],
-        users: [],
-        editedIndex: -1,
-        editedItem: [
-
-        ],
+        scores: [],
         dialog: false,
       }
     },
@@ -79,19 +75,19 @@
 
     methods: {
       ...mapActions({
-        getUsers: 'getUsers',
+        getScores: 'getScores',
       }),
 
       initialize () {
-        this.getUsers().then(res => {
-          this.users = res.data.content.data
+        this.getScores().then(res => {
+          this.scores = res.data.content.data
         }).catch(err => {
           console.log(err)
         })
       },
 
-      editUser (item) {
-        console.log(item)
+      editUser () {
+
       },
     },
 

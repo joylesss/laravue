@@ -77,13 +77,14 @@
     </v-list>
 
     <template v-slot:append>
-      <base-item
-        :item="{
-          title: $t('upgrade'),
-          icon: 'mdi-package-up',
-          to: '/upgrade',
-        }"
-      />
+      <v-col
+        cols="12"
+        class="text-center"
+      >
+        <v-btn @click="Logout">
+          Logout
+        </v-btn>
+      </v-col>
     </template>
   </v-navigation-drawer>
 </template>
@@ -91,7 +92,7 @@
 <script>
   // Utilities
   import {
-    mapState,
+    mapState, mapActions,
   } from 'vuex'
 
   export default {
@@ -110,21 +111,36 @@
           icon: 'mdi-view-dashboard',
           title: 'dashboard',
           to: '/admin',
-        },
+        }, /*
         {
           icon: 'mdi-account',
           title: 'user',
-          to: '/admin/pages/user',
-        },
+          to: '/admin/user',
+        }, */
         {
-          title: 'Users',
-          icon: 'mdi-clipboard-outline',
+          title: 'Thông tin người dùng',
+          icon: 'mdi-account-group',
           to: '/admin/users',
         },
         {
-          title: 'notifications',
-          icon: 'mdi-bell',
-          to: '/admin/components/notifications',
+          title: 'Thông tin ứng dụng',
+          icon: 'mdi-apps',
+          to: '/admin/apps',
+        },
+        {
+          title: 'Câu hỏi và đáp án',
+          icon: 'mdi-forum',
+          to: '/admin/questions',
+        },
+        {
+          title: 'Điểm số',
+          icon: 'mdi-scoreboard',
+          to: '/admin/scores',
+        },
+        {
+          title: 'Chiến thắng',
+          icon: 'mdi-counter',
+          to: '/admin/wins',
         },
       ],
     }),
@@ -157,6 +173,17 @@
           children: item.children ? item.children.map(this.mapItem) : undefined,
           title: this.$t(item.title),
         }
+      },
+
+      ...mapActions({
+        logout: 'logout',
+      }),
+      Logout () {
+        this.logout().then(() => {
+          this.$router.replace({
+            path: '/login',
+          })
+        })
       },
     },
   }

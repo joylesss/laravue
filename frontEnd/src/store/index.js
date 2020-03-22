@@ -65,9 +65,8 @@ export default new Vuex.Store({
 
     logout ({ commit }) {
       return axios.post('logout')
-        .then(() => {
-          commit('SET_TOKEN', null)
-          commit('SET_USER', null)
+        .then(res => {
+          console.log(res)
         })
         .catch((e) => {
           console.log(e)
@@ -76,6 +75,37 @@ export default new Vuex.Store({
 
     async getUsers () {
       return axios.get('info_users')
+    },
+    async updateUser (_, params) {
+      return axios.put('info_users/' + params.id, params)
+    },
+
+    async getApps () {
+      return axios.get('info_apps')
+    },
+    async updateApp (_, params) {
+      return axios.put('info_apps/' + params.id, params)
+    },
+
+    async getQuestions () {
+      return axios.get('info_questions')
+    },
+    async updateQuestion (_, params) {
+      return axios.put('info_questions/' + params.id, params)
+    },
+
+    async getScores () {
+      return axios.get('info_scores')
+    },
+    async updateScore (_, params) {
+      return axios.put('info_scores/' + params.id, params)
+    },
+
+    async getWins () {
+      return axios.get('info_wins')
+    },
+    async updateWin (_, params) {
+      return axios.put('info_wins/' + params.id, params)
     },
   },
 })

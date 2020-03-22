@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Service\QuestionService;
 
 class QuestionController extends Controller
@@ -33,7 +34,7 @@ class QuestionController extends Controller
 
     public function show($id)
     {
-        //
+        return $this->respondSuccess($this->questionService->show($id));
     }
 
     public function edit($id)
@@ -43,7 +44,7 @@ class QuestionController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        return $this->respondSuccess($this->questionService->update($request, $id));
     }
 
     public function destroy($id)

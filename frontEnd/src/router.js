@@ -31,28 +31,44 @@ export default new Router({
           path: '/',
           component: () => import('@/views/dashboard/Dashboard'),
         },
-        // Pages
+        // Tables
         {
+          name: 'Thông tin người đùng',
+          path: 'users',
+          component: () => import('@/views/dashboard/tables/UsersTable'),
+        },
+        {
+          name: 'Thông tin ứng dụng',
+          path: 'apps',
+          component: () => import('@/views/dashboard/tables/AppsTable'),
+        },
+        {
+          name: 'Thông tin câu hỏi và đán án',
+          path: 'questions',
+          component: () => import('@/views/dashboard/tables/QuestionsTable'),
+        },
+        {
+          name: 'Thông tin điểm số',
+          path: 'scores',
+          component: () => import('@/views/dashboard/tables/ScoresTable'),
+        },
+        {
+          name: 'Thông tin người chiến thắng',
+          path: 'wins',
+          component: () => import('@/views/dashboard/tables/WinsTable'),
+        },
+        // Pages
+        /* {
           name: 'User Profile',
           path: 'pages/user',
           component: () => import('@/views/dashboard/pages/UserProfile'),
-        },
+        }, */
         {
           name: 'Notifications',
           path: 'components/notifications',
           component: () => import('@/views/dashboard/component/Notifications'),
         },
-        {
-          name: 'Icons',
-          path: 'components/icons',
-          component: () => import('@/views/dashboard/component/Icons'),
-        },
-        // Tables
-        {
-          name: 'Users Table',
-          path: 'users',
-          component: () => import('@/views/dashboard/tables/UsersTable'),
-        },
+
       ],
       beforeEnter: (to, from, next) => {
         if (!store.getters.authenticated) {

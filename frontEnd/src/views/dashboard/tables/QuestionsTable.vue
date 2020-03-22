@@ -12,11 +12,12 @@
 
       <v-card>
         <base-material-card
-          icon="mdi-account-group"
+          icon="mdi-forum"
           title=""
           class="px-5 py-3"
         />
         <v-card-title>
+          <create-question />
           <v-text-field
             v-model="search"
             append-icon="mdi-magnify"
@@ -27,11 +28,11 @@
         </v-card-title>
         <v-data-table
           :headers="headers"
-          :items="users"
+          :items="questions"
           :search="search"
         >
           <template v-slot:item.action="{ item }">
-            <popup-user :item="item" />
+            <popup-question :item="item" />
             <confirm-edit />
           </template>
         </v-data-table>
@@ -44,8 +45,9 @@
   export default {
     name: 'Users',
     components: {
-      PopupUser: () => import('../popup/User'),
+      PopupQuestion: () => import('../popup/Question'),
       ConfirmEdit: () => import('../popup/ConfirmEdit'),
+      createQuestion: () => import('../popup/Create'),
     },
 
     data () {
@@ -54,21 +56,20 @@
         headers: [
           {
             text: '#ID',
-            align: 'center',
+            align: 'start',
             sortable: false,
             value: 'id',
           },
-          { text: 'Tên người dùng', value: 'user_name' },
-          { text: 'Số điện thoại', value: 'phone' },
-          { text: 'Facebook ID', value: 'fb_id' },
-          { text: 'Thư điện tử', value: 'fb_email' },
+          { text: 'Tên ứng dụng', value: 'app_name' },
+          { text: 'Câu hỏi', value: 'details' },
+          { text: 'Đáp án A', value: 'a' },
+          { text: 'Đáp án B', value: 'b' },
+          { text: 'Đáp án C', value: 'c' },
+          { text: 'Đáp án D', value: 'd' },
+          { text: 'Câu trả lời', value: 'answer' },
           { text: '', value: 'action', sortable: false, align: 'center' },
         ],
-        users: [],
-        editedIndex: -1,
-        editedItem: [
-
-        ],
+        questions: [],
         dialog: false,
       }
     },
@@ -79,19 +80,22 @@
 
     methods: {
       ...mapActions({
-        getUsers: 'getUsers',
+        getQuestions: 'getQuestions',
+        createQuestion: 'createQuestion',
       }),
 
       initialize () {
-        this.getUsers().then(res => {
-          this.users = res.data.content.data
+        this.getQuestions().then(res => {
+          this.questions = res.data.content.data
         }).catch(err => {
           console.log(err)
         })
       },
 
-      editUser (item) {
-        console.log(item)
+      Create () {
+        this.createQuestion({
+
+        })
       },
     },
 

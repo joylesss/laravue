@@ -8,7 +8,7 @@
       <v-icon
         small
         class="mr-2"
-        @click="showUser( item )"
+        @click="showWin( item )"
         v-on="on"
         v-text="'$vuetify.icons.playlistEdit'"
       />
@@ -26,7 +26,7 @@
           <base-material-card>
             <template v-slot:heading>
               <div class="display-2 font-weight-light">
-                Chỉnh sửa thông tin người sử dụng
+                Chỉnh sửa thông tin người chiến thắng
               </div>
 
               <div class="subtitle-1 font-weight-light">
@@ -51,6 +51,7 @@
                       class="purple-input"
                       label="Tên người dùng"
                       name="user_name"
+                      disabled
                     />
                   </v-col>
 
@@ -59,21 +60,10 @@
                     md="4"
                   >
                     <v-text-field
-                      v-model="phone"
+                      v-model="app_name"
                       class="purple-input"
                       label="Số điện thoại"
-                      name="phone"
-                    />
-                  </v-col>
-
-                  <v-col
-                    cols="12"
-                    md="6"
-                  >
-                    <v-text-field
-                      v-model="fb_id"
-                      class="purple-input"
-                      label="Facebook ID"
+                      name="app_name"
                       disabled
                     />
                   </v-col>
@@ -83,10 +73,22 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="fb_email"
+                      v-model="prize"
                       class="purple-input"
-                      label="Thư điện tử"
-                      name="fb_email"
+                      label="Giải thưởng"
+                      name="prize"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="plan_test"
+                      class="purple-input"
+                      label="Kế hoạch kiểm tra"
+                      name="plan_test"
                     />
                   </v-col>
 
@@ -135,9 +137,9 @@
         /* Form info data */
         id: '',
         user_name: '',
-        phone: '',
-        fb_id: '',
-        fb_email: '',
+        app_name: '',
+        prize: '',
+        plan_test: '',
       }
     },
 
@@ -147,27 +149,28 @@
 
     methods: {
       ...mapActions({
-        updateUser: 'updateUser',
+        updateWin: 'updateWin',
       }),
 
       initialize () {
 
       },
 
-      showUser (item) {
+      showWin (item) {
         this.id = item.id
         this.user_name = item.user_name
-        this.phone = item.phone
-        this.fb_id = item.fb_id
-        this.fb_email = item.fb_email
+        this.app_name = item.app_name
+        this.prize = item.prize
+        this.plan_test = item.plan_test
       },
 
       async Update () {
-        this.updateUser({
+        this.updateWin({
           id: this.id,
           user_name: this.user_name,
-          phone: this.phone,
-          fb_email: this.fb_email,
+          app_name: this.app_name,
+          prize: this.prize,
+          plan_test: this.plan_test,
         }).then(res => {
           this.dialog = false
         }).catch(err => {

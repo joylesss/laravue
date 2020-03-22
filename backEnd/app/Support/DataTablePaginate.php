@@ -1,7 +1,7 @@
 <?php
 namespace App\Support;
 
-trait DataTablePaginate {
+class DataTablePaginate {
 
     /**
      * @param $query

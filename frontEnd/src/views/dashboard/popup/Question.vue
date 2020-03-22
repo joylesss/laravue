@@ -8,7 +8,7 @@
       <v-icon
         small
         class="mr-2"
-        @click="showUser( item )"
+        @click="showQuestion( item )"
         v-on="on"
         v-text="'$vuetify.icons.playlistEdit'"
       />
@@ -44,36 +44,13 @@
                   >
                   <v-col
                     cols="12"
-                    md="4"
+                    md="12"
                   >
                     <v-text-field
-                      v-model="user_name"
+                      v-model="app_name"
                       class="purple-input"
-                      label="Tên người dùng"
-                      name="user_name"
-                    />
-                  </v-col>
-
-                  <v-col
-                    cols="12"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="phone"
-                      class="purple-input"
-                      label="Số điện thoại"
-                      name="phone"
-                    />
-                  </v-col>
-
-                  <v-col
-                    cols="12"
-                    md="6"
-                  >
-                    <v-text-field
-                      v-model="fb_id"
-                      class="purple-input"
-                      label="Facebook ID"
+                      label="Tên ứng dụng"
+                      name="app_name"
                       disabled
                     />
                   </v-col>
@@ -83,10 +60,65 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="fb_email"
+                      v-model="details"
                       class="purple-input"
-                      label="Thư điện tử"
-                      name="fb_email"
+                      label="Câu hỏi"
+                      name="details"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="a"
+                      class="purple-input"
+                      label="Đáp án A"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="b"
+                      class="purple-input"
+                      label="Đáp án B"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="c"
+                      class="purple-input"
+                      label="Đáp án C"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="d"
+                      class="purple-input"
+                      label="Đáp án D"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="answer"
+                      class="purple-input"
+                      label="Câu trả lời"
                     />
                   </v-col>
 
@@ -134,10 +166,13 @@
         dialog: false,
         /* Form info data */
         id: '',
-        user_name: '',
-        phone: '',
-        fb_id: '',
-        fb_email: '',
+        app_name: '',
+        details: '',
+        a: '',
+        b: '',
+        c: '',
+        d: '',
+        answer: '',
       }
     },
 
@@ -147,27 +182,34 @@
 
     methods: {
       ...mapActions({
-        updateUser: 'updateUser',
+        updateQuestion: 'updateQuestion',
       }),
 
       initialize () {
 
       },
 
-      showUser (item) {
+      showQuestion (item) {
         this.id = item.id
-        this.user_name = item.user_name
-        this.phone = item.phone
-        this.fb_id = item.fb_id
-        this.fb_email = item.fb_email
+        this.app_name = item.app_name
+        this.details = item.details
+        this.a = item.a
+        this.b = item.b
+        this.c = item.c
+        this.d = item.d
+        this.answer = item.answer
       },
 
       async Update () {
-        this.updateUser({
+        this.updateQuestion({
           id: this.id,
-          user_name: this.user_name,
-          phone: this.phone,
-          fb_email: this.fb_email,
+          app_name: this.app_name,
+          details: this.details,
+          a: this.a,
+          b: this.b,
+          c: this.c,
+          d: this.d,
+          answer: this.answer,
         }).then(res => {
           this.dialog = false
         }).catch(err => {

@@ -5,13 +5,9 @@
     max-width="600px"
   >
     <template v-slot:activator="{ on }">
-      <v-icon
-        small
-        class="mr-2"
-        @click="showUser( item )"
+      <v-btn
         v-on="on"
-        v-text="'$vuetify.icons.playlistEdit'"
-      />
+      >Tạo mới</v-btn>
     </template>
     <v-container
       id="user-profile"
@@ -26,7 +22,7 @@
           <base-material-card>
             <template v-slot:heading>
               <div class="display-2 font-weight-light">
-                Chỉnh sửa thông tin người sử dụng
+                Tạo mới thông tin câu hỏi
               </div>
 
               <div class="subtitle-1 font-weight-light">
@@ -37,32 +33,25 @@
             <v-form>
               <v-container class="py-0">
                 <v-row>
-                  <input
-                    v-model="id"
-                    type="hidden"
-                    name="id"
-                  >
                   <v-col
                     cols="12"
-                    md="4"
+                    md="12"
                   >
-                    <v-text-field
-                      v-model="user_name"
-                      class="purple-input"
-                      label="Tên người dùng"
-                      name="user_name"
-                    />
+                    <v-select
+                      :items="items_app"
+                      label="Tên ứng dụng"
+                    ></v-select>
                   </v-col>
 
                   <v-col
                     cols="12"
-                    md="4"
+                    md="6"
                   >
                     <v-text-field
-                      v-model="phone"
+                      v-model="details"
                       class="purple-input"
-                      label="Số điện thoại"
-                      name="phone"
+                      label="Câu hỏi"
+                      name="details"
                     />
                   </v-col>
 
@@ -71,10 +60,9 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="fb_id"
+                      v-model="a"
                       class="purple-input"
-                      label="Facebook ID"
-                      disabled
+                      label="Đáp án A"
                     />
                   </v-col>
 
@@ -83,10 +71,41 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="fb_email"
+                      v-model="b"
                       class="purple-input"
-                      label="Thư điện tử"
-                      name="fb_email"
+                      label="Đáp án B"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="c"
+                      class="purple-input"
+                      label="Đáp án C"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="d"
+                      class="purple-input"
+                      label="Đáp án D"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-select
+                      :items="items_answer"
+                      label="Câu trả lời"
                     />
                   </v-col>
 
@@ -109,7 +128,7 @@
                     <v-btn
                       color="success"
                       class="mr-0 text-right"
-                      @click="Update"
+                      @click="Create"
                     >
                       Cập nhật
                     </v-btn>
@@ -132,12 +151,17 @@
     data () {
       return {
         dialog: false,
+        items_app: ['Nhanh Như Chớp', 'Luyện Nghe Tiếng Anh', 'Ai Là Triệu Phú'],
+        items_answer: ['A', 'B', 'C', 'D'],
         /* Form info data */
         id: '',
-        user_name: '',
-        phone: '',
-        fb_id: '',
-        fb_email: '',
+        app_id: '',
+        details: '',
+        a: '',
+        b: '',
+        c: '',
+        d: '',
+        answer: '',
       }
     },
 
@@ -147,27 +171,22 @@
 
     methods: {
       ...mapActions({
-        updateUser: 'updateUser',
+        createQuestion: 'createQuestion',
       }),
 
       initialize () {
 
       },
 
-      showUser (item) {
-        this.id = item.id
-        this.user_name = item.user_name
-        this.phone = item.phone
-        this.fb_id = item.fb_id
-        this.fb_email = item.fb_email
-      },
-
-      async Update () {
-        this.updateUser({
-          id: this.id,
-          user_name: this.user_name,
-          phone: this.phone,
-          fb_email: this.fb_email,
+      async Create () {
+        this.createQuestion({
+          app_id: this.app_id,
+          details: this.details,
+          a: this.a,
+          b: this.b,
+          c: this.c,
+          d: this.d,
+          answer: this.answer,
         }).then(res => {
           this.dialog = false
         }).catch(err => {

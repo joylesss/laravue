@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Service\UserService;
 
 class UserController extends Controller
@@ -26,15 +27,17 @@ class UserController extends Controller
         //
     }
 
-    public function store(RequestValidation $request)
+    /**
+     * @param Request $request
+     */
+    public function store(Request $request)
     {
         //
     }
 
-    public function show($user_id, $app_id)
+    public function show($id)
     {
-        //
-        return $this->userService->show($user_id, $app_id);
+        return $this->respondSuccess($this->userService->show($id));
     }
 
     public function edit($id)
@@ -44,7 +47,7 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        return $this->respondSuccess($this->userService->update($request, $id));
     }
 
     public function destroy($id)

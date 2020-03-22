@@ -3,7 +3,7 @@
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-window.Vue = require('vue');
+/*window.Vue = require('vue');
 import vuetify from './vuetify';
 import router from './router';
 
@@ -20,4 +20,5 @@ const app = new Vue({
     },
 
 
-});
+});*/
+require('../../../frontEnd/src/main');

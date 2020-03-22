@@ -31,7 +31,7 @@
     <v-spacer />
 
     <v-text-field
-      :label="$t('search')"
+      :label="$t('Tìm kiếm ...')"
       color="secondary"
       hide-details
       style="max-width: 165px;"
@@ -110,7 +110,7 @@
       class="ml-2"
       min-width="0"
       text
-      to="/pages/user"
+      to=""
     >
       <v-icon>mdi-account</v-icon>
     </v-btn>
@@ -162,11 +162,7 @@
 
     data: () => ({
       notifications: [
-        'Mike John Responded to your email',
-        'You have 5 new tasks',
-        'You\'re now friends with Andrew',
-        'Another Notification',
-        'Another one',
+        'Kiểm tra dữ liệu ...',
       ],
     }),
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Service\ScoreService;
 
 class ScoreController extends Controller
@@ -43,7 +44,7 @@ class ScoreController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        return $this->respondSuccess($this->scoreService->update($request, $id));
     }
 
     public function destroy($id)

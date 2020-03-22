@@ -12,7 +12,7 @@
 
       <v-card>
         <base-material-card
-          icon="mdi-account-group"
+          icon="mdi-apps"
           title=""
           class="px-5 py-3"
         />
@@ -27,11 +27,11 @@
         </v-card-title>
         <v-data-table
           :headers="headers"
-          :items="users"
+          :items="apps"
           :search="search"
         >
           <template v-slot:item.action="{ item }">
-            <popup-user :item="item" />
+            <popup-app :item="item" />
             <confirm-edit />
           </template>
         </v-data-table>
@@ -42,9 +42,9 @@
 <script>
   import { mapActions } from 'vuex'
   export default {
-    name: 'Users',
+    name: 'Apps',
     components: {
-      PopupUser: () => import('../popup/User'),
+      PopupApp: () => import('../popup/App'),
       ConfirmEdit: () => import('../popup/ConfirmEdit'),
     },
 
@@ -54,21 +54,19 @@
         headers: [
           {
             text: '#ID',
-            align: 'center',
+            align: 'start',
             sortable: false,
             value: 'id',
           },
-          { text: 'Tên người dùng', value: 'user_name' },
-          { text: 'Số điện thoại', value: 'phone' },
-          { text: 'Facebook ID', value: 'fb_id' },
-          { text: 'Thư điện tử', value: 'fb_email' },
+          { text: 'Tên ứng dụng', value: 'app_name' },
+          { text: 'Phiên bản ios', value: 'version_ios' },
+          { text: 'Phiên bản android', value: 'version_android' },
+          { text: 'Giải thưởng', value: 'prize' },
+          { text: 'Kế hoạch kiểm tra', value: 'plan_test' },
+          { text: 'Kế hoạch chiến thắng', value: 'plan_show_win' },
           { text: '', value: 'action', sortable: false, align: 'center' },
         ],
-        users: [],
-        editedIndex: -1,
-        editedItem: [
-
-        ],
+        apps: [],
         dialog: false,
       }
     },
@@ -79,19 +77,19 @@
 
     methods: {
       ...mapActions({
-        getUsers: 'getUsers',
+        getApps: 'getApps',
       }),
 
       initialize () {
-        this.getUsers().then(res => {
-          this.users = res.data.content.data
+        this.getApps().then(res => {
+          this.apps = res.data.content.data
         }).catch(err => {
           console.log(err)
         })
       },
 
-      editUser (item) {
-        console.log(item)
+      editUser () {
+
       },
     },
 

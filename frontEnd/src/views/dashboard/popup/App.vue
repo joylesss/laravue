@@ -8,7 +8,7 @@
       <v-icon
         small
         class="mr-2"
-        @click="showUser( item )"
+        @click="showApp( item )"
         v-on="on"
         v-text="'$vuetify.icons.playlistEdit'"
       />
@@ -26,7 +26,7 @@
           <base-material-card>
             <template v-slot:heading>
               <div class="display-2 font-weight-light">
-                Chỉnh sửa thông tin người sử dụng
+                Chỉnh sửa thông tin ứng dụng
               </div>
 
               <div class="subtitle-1 font-weight-light">
@@ -44,25 +44,13 @@
                   >
                   <v-col
                     cols="12"
-                    md="4"
+                    md="6"
                   >
                     <v-text-field
-                      v-model="user_name"
+                      v-model="app_name"
                       class="purple-input"
-                      label="Tên người dùng"
-                      name="user_name"
-                    />
-                  </v-col>
-
-                  <v-col
-                    cols="12"
-                    md="4"
-                  >
-                    <v-text-field
-                      v-model="phone"
-                      class="purple-input"
-                      label="Số điện thoại"
-                      name="phone"
+                      label="Tên ứng dụng"
+                      name="app_name"
                     />
                   </v-col>
 
@@ -71,10 +59,10 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="fb_id"
+                      v-model="version_ios"
                       class="purple-input"
-                      label="Facebook ID"
-                      disabled
+                      label="Phiên bản ios"
+                      name="version_ios"
                     />
                   </v-col>
 
@@ -83,10 +71,46 @@
                     md="6"
                   >
                     <v-text-field
-                      v-model="fb_email"
+                      v-model="version_android"
                       class="purple-input"
-                      label="Thư điện tử"
-                      name="fb_email"
+                      label="Phiên bản android"
+                      name="version_android"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="prize"
+                      class="purple-input"
+                      label="Giải thưởng"
+                      name="prize"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="plan_test"
+                      class="purple-input"
+                      label="Kế hoạch kiểm tra"
+                      name="plan_test"
+                    />
+                  </v-col>
+
+                  <v-col
+                    cols="12"
+                    md="6"
+                  >
+                    <v-text-field
+                      v-model="plan_show_win"
+                      class="purple-input"
+                      label="Kế hoạch chiến thắng"
+                      name="plan_show_win"
                     />
                   </v-col>
 
@@ -134,10 +158,12 @@
         dialog: false,
         /* Form info data */
         id: '',
-        user_name: '',
-        phone: '',
-        fb_id: '',
-        fb_email: '',
+        app_name: '',
+        version_ios: '',
+        version_android: '',
+        prize: '',
+        plan_test: '',
+        plan_show_win: '',
       }
     },
 
@@ -147,27 +173,32 @@
 
     methods: {
       ...mapActions({
-        updateUser: 'updateUser',
+        updateApp: 'updateApp',
       }),
 
       initialize () {
 
       },
 
-      showUser (item) {
+      showApp (item) {
         this.id = item.id
-        this.user_name = item.user_name
-        this.phone = item.phone
-        this.fb_id = item.fb_id
-        this.fb_email = item.fb_email
+        this.app_name = item.app_name
+        this.version_ios = item.version_ios
+        this.version_android = item.version_android
+        this.prize = item.prize
+        this.plan_test = item.plan_test
+        this.plan_show_win = item.plan_show_win
       },
 
       async Update () {
-        this.updateUser({
+        this.updateApp({
           id: this.id,
-          user_name: this.user_name,
-          phone: this.phone,
-          fb_email: this.fb_email,
+          app_name: this.app_name,
+          version_ios: this.version_ios,
+          version_android: this.version_android,
+          prize: this.prize,
+          plan_test: this.plan_test,
+          plan_show_win: this.plan_show_win,
         }).then(res => {
           this.dialog = false
         }).catch(err => {

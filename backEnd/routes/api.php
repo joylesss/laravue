@@ -23,11 +23,15 @@ Route::middleware('jwt')->group(function() {
     });
 
     Route::namespace('Api')->group(function() {
+        # Get all info
         Route::resource('info_users', 'UserController');
         Route::resource('info_apps', 'AppController');
         Route::resource('info_scores', 'ScoreController');
         Route::resource('info_questions', 'QuestionController');
         Route::resource('info_wins', 'WinController');
+
+        # Get every one by id
+//        Route::get('user/edit', '');
     });
 });
 
