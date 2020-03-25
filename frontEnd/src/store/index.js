@@ -79,6 +79,9 @@ export default new Vuex.Store({
     async updateUser (_, params) {
       return axios.put('info_users/' + params.id, params)
     },
+    async deleteUser (_, id) {
+      return axios.delete('info_users/' + id)
+    },
 
     async getApps () {
       return axios.get('info_apps')

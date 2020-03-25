@@ -54,6 +54,7 @@ class UserService {
 
     public function destroy($id)
     {
-        //
+        $user = Users::findOrFail($id);
+        return $user->delete();
     }
 }

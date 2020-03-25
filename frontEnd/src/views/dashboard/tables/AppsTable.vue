@@ -32,7 +32,7 @@
         >
           <template v-slot:item.action="{ item }">
             <popup-app :item="item" />
-            <confirm-edit />
+            <confirm-delete :id="item.id" />
           </template>
         </v-data-table>
       </v-card>
@@ -45,7 +45,7 @@
     name: 'Apps',
     components: {
       PopupApp: () => import('../popup/App'),
-      ConfirmEdit: () => import('../popup/ConfirmEdit'),
+      ConfirmDelete: () => import('../popup/ConfirmDelete'),
     },
 
     data () {

@@ -1,95 +1,119 @@
 <template>
-  <v-container
-    id="dashboard"
-    fluid
-    tag="section"
-  >
+  <!--  <v-card class="d-inline-block mx-auto">-->
+  <v-container>
     <v-row>
-
       <v-col
         cols="12"
-        sm="12"
-        lg="3"
+        sm="2"
+        lg="2"
+        class="text-center"
       >
-        <base-material-stats-card
-          color="info"
-          icon="mdi-twitter"
-          title="Followers"
-          value="+245"
-          sub-icon="mdi-clock"
-          sub-text="Just Updated"
+        <v-row
+          class=""
+        >
+          <v-col class="px-0">
+            <v-img
+              class="text-img-center"
+              width="288"
+              :src="require('@/assets/app_ios.png')"
+            />
+          </v-col>
+
+          <v-col class="px-0">
+            <v-img
+              class="text-img-center"
+              width="288"
+              :src="require('@/assets/app_android.png')"
+            />
+          </v-col>
+
+          <v-col class="px-0">
+            <v-img
+              class="text-img-center"
+              width="288"
+              :src="require('@/assets/code.png')"
+            />
+          </v-col>
+
+          <v-col class="px-0">
+            <v-img
+              class="text-img-center"
+              width="288"
+              :src="require('@/assets/millionaire.png')"
+            />
+          </v-col>
+        </v-row>
+      </v-col>
+      <v-col
+        cols="12"
+        sm="4"
+        lg="4"
+      >
+        <v-img
+          class="text-img-center"
+          width="288"
+          height="567"
+          :src="require('@/assets/UIHere.png')"
         />
       </v-col>
 
       <v-col
         cols="12"
-        sm="6"
-        lg="6"
+        sm="4"
+        lg="4"
       >
-        <base-material-stats-card
-          color="primary"
-          icon="mdi-poll"
-          title="Website Visits"
-          value="75.521"
-          sub-icon="mdi-tag"
-          sub-text="Tracked from Google Analytics"
+        <v-img
+          class="text-img-center"
+          width="288"
+          height="567"
+          :src="require('@/assets/UIHere.png')"
         />
       </v-col>
-
       <v-col
         cols="12"
-        sm="6"
-        lg="3"
+        sm="2"
+        lg="2"
+        class="text-center"
       >
-        <base-material-stats-card
-          color="primary"
-          icon="mdi-poll"
-          title="Website Visits"
-          value="75.521"
-          sub-icon="mdi-tag"
-          sub-text="Tracked from Google Analytics"
-        />
-      </v-col>
+        <v-row
+          class=""
+        >
+          <v-col class="px-0">
+            <v-img
+              class="text-img-center"
+              width="288"
+              :src="require('@/assets/app_ios.png')"
+            />
+          </v-col>
 
-      <v-col
-        cols="12"
-        sm="6"
-        lg="3"
-      >
-        <base-material-stats-card
-          color="success"
-          icon="mdi-store"
-          title="Revenue"
-          value="$ 34,245"
-          sub-icon="mdi-calendar"
-          sub-text="Last 24 Hours"
-        />
-      </v-col>
+          <v-col class="px-0">
+            <v-img
+              class="text-img-center"
+              width="288"
+              :src="require('@/assets/app_android.png')"
+            />
+          </v-col>
 
-      <v-col
-        cols="12"
-        sm="6"
-        lg="6"
-      >
-      </v-col>
+          <v-col class="px-0">
+            <v-img
+              class="text-img-center"
+              width="288"
+              :src="require('@/assets/code.png')"
+            />
+          </v-col>
 
-      <v-col
-        cols="12"
-        sm="6"
-        lg="3"
-      >
-        <base-material-stats-card
-          color="orange"
-          icon="mdi-sofa"
-          title="Bookings"
-          value="184"
-          sub-icon="mdi-alert"
-          sub-icon-color="red"
-          sub-text="Get More Space..."
-        />
+          <v-col class="px-0">
+            <v-img
+              class="text-img-center"
+              width="288"
+              :src="require('@/assets/millionaire.png')"
+            />
+          </v-col>
+        </v-row>
       </v-col>
     </v-row>
   </v-container>
+<!--  </v-card>-->
 </template>
 
 <script>
