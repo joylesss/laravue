@@ -49,7 +49,7 @@ class AppController extends Controller
 
     public function destroy($id)
     {
-        //
+        return $this->respondSuccess($this->appService->destroy($id));
     }
 
 }

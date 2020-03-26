@@ -89,12 +89,21 @@ export default new Vuex.Store({
     async updateApp (_, params) {
       return axios.put('info_apps/' + params.id, params)
     },
+    async deleteApp (_, id) {
+      return axios.delete('info_apps/' + id)
+    },
 
     async getQuestions () {
       return axios.get('info_questions')
     },
+    async createQuestion (_, params) {
+      return axios.post('info_questions', params)
+    },
     async updateQuestion (_, params) {
       return axios.put('info_questions/' + params.id, params)
+    },
+    async deleteQuestion (_, id) {
+      return axios.delete('info_questions/' + id)
     },
 
     async getScores () {
@@ -103,12 +112,18 @@ export default new Vuex.Store({
     async updateScore (_, params) {
       return axios.put('info_scores/' + params.id, params)
     },
+    async deleteScore (_, id) {
+      return axios.delete('info_scores/' + id)
+    },
 
     async getWins () {
       return axios.get('info_wins')
     },
     async updateWin (_, params) {
       return axios.put('info_wins/' + params.id, params)
+    },
+    async deleteWin (_, id) {
+      return axios.delete('info_wins/' + id)
     },
   },
 })

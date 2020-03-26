@@ -24,10 +24,6 @@
               <div class="display-2 font-weight-light">
                 Tạo mới thông tin câu hỏi
               </div>
-
-              <div class="subtitle-1 font-weight-light">
-                Complete your profile
-              </div>
             </template>
 
             <v-form>

@@ -49,7 +49,7 @@ class WinController extends Controller
 
     public function destroy($id)
     {
-        //
+        return $this->respondSuccess($this->winService->destroy($id));
     }
 
 }

@@ -54,6 +54,7 @@ class AppService {
 
     public function destroy($id)
     {
-        //
+        $app = Apps::findOrFail($id);
+        return $app->delete();
     }
 }

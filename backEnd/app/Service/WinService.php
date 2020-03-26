@@ -57,6 +57,7 @@ class WinService {
 
     public function destroy($id)
     {
-        //
+        $win = Wins::findOrFail($id);
+        return $win->delete();
     }
 }

@@ -1,86 +1,84 @@
 <template>
-  <v-app id="inspire">
-    <v-content>
-      <v-container
-        class="fill-height"
-        fluid
-      >
-        <v-row
-          align="center"
-          justify="center"
+  <div class="form-login custom-alert">
+    <v-app id="">
+      <v-content>
+        <v-container
+          class="fill-height"
+          fluid
         >
-          <v-col
-            cols="12"
-            sm="8"
-            md="4"
+          <v-row
+            align="center"
+            justify="center"
           >
-            <v-card class="elevation-12">
-              <v-toolbar
-                color="primary"
-                dark
-                flat
-              >
-                <v-toolbar-title>Login form</v-toolbar-title>
-                <v-spacer />
-              </v-toolbar>
-              <v-card-text>
-                <v-progress-linear
-                  :active="loading"
-                  :indeterminate="loading"
-                  absolute
-                  top
-                  color="deep-purple accent-4"
+            <v-col
+              cols="10"
+              sm="6"
+              md="4"
+            >
+              <v-card>
+                <base-material-card
+                  icon="mdi-account-tie"
                 />
-                <v-form>
-                  <v-text-field
-                    v-model="fb_email"
-                    :rules="fb_emailRules"
-                    label="Email"
-                    name="fb_email"
-                    prepend-icon="mdi-account"
-                    type="email"
-                  />
+                <v-card class="">
+                  <v-card-text>
+                    <v-form>
+                      <v-text-field
+                        v-model="fb_email"
+                        :rules="fb_emailRules"
+                        label="Thư điện tử"
+                        name="fb_email"
+                        prepend-icon="mdi-account"
+                        type="email"
+                      />
 
-                  <v-text-field
-                    id="password"
-                    v-model="password"
-                    :rules="passwordRules"
-                    label="Password"
-                    name="password"
-                    prepend-icon="mdi-lock"
-                    type="password"
-                  />
-                </v-form>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer />
-                <v-btn
-                  color="primary"
-                  @click="Login"
-                >
-                  Login
-                </v-btn>
-              </v-card-actions>
-              <v-snackbar
-                v-model="snackbar"
-                :timeout="timeout"
-              >
-                {{ text }}
-                <v-btn
-                  :color="color"
-                  :top="y === 'top'"
-                  text
-                  @click="snackbar = false"
-                >
-                  Close
-                </v-btn>
-              </v-snackbar>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-content>
-  </v-app>
+                      <v-text-field
+                        id="password"
+                        v-model="password"
+                        :rules="passwordRules"
+                        label="Mật khẩu"
+                        name="password"
+                        prepend-icon="mdi-lock"
+                        type="password"
+                      />
+                    </v-form>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer />
+                    <v-btn
+                      color="primary"
+                      @click="Login"
+                    >
+                      Đăng nhập
+                    </v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-content>
+    </v-app>
+
+    <div class="">
+      <v-bottom-sheet
+        v-model="alert"
+        inset
+      >
+        <v-alert
+          v-model="alert"
+          dismissible
+          color="error"
+          border="left"
+          elevation="2"
+          colored-border
+          icon="mdi-alert"
+          width="320"
+        >
+          {{textAlert}}
+        </v-alert>
+      </v-bottom-sheet>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -95,21 +93,15 @@
       return {
         fb_email: '',
         fb_emailRules: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+          v => !!v || 'Thư điện tử là bắt buộc',
+          v => /.+@.+\..+/.test(v) || 'Thư điện tử phải hợp lệ',
         ],
         password: '',
         passwordRules: [
-          v => !!v || 'Password is required',
+          v => !!v || 'Mật khẩu là bắt buộc',
         ],
-
-        loading: false,
-        snackbar: false,
-        color: '',
-        text: '',
-        timeout: 3000,
-        x: null,
-        y: top,
+        alert: false,
+        textAlert: '',
       }
     },
 
@@ -127,7 +119,8 @@
             path: '/admin',
           })
         }).catch(() => {
-          console.log('Error!')
+          this.alert = true
+          this.textAlert = 'Tài khoản và mật khẩu không chính xác!'
         })
       },
     },

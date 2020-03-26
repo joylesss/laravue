@@ -49,7 +49,7 @@ class ScoreController extends Controller
 
     public function destroy($id)
     {
-        //
+        return $this->respondSuccess($this->scoreService->destroy($id));
     }
 
 }

@@ -27,9 +27,9 @@ class QuestionController extends Controller
         //
     }
 
-    public function store(RequestValidation $request)
+    public function store(Request $request)
     {
-        //
+        return $this->respondSuccess($this->questionService->store($request));
     }
 
     public function show($id)
@@ -49,7 +49,7 @@ class QuestionController extends Controller
 
     public function destroy($id)
     {
-        //
+        return $this->respondSuccess($this->questionService->destroy($id));
     }
 
 }

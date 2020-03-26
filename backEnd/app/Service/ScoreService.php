@@ -58,6 +58,7 @@ class ScoreService {
 
     public function destroy($id)
     {
-        //
+        $score = Scores::findOrFail($id);
+        return $score->delete();
     }
 }
