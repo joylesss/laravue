@@ -470,7 +470,7 @@
         dialogDelete: false,
         alert: false,
         textAlert: '',
-        items_app: ['Nhanh Như Chớp', 'Luyện Nghe Tiếng Anh', 'Ai Là Triệu Phú'],
+        items_app: [],
         items_answer: ['A', 'B', 'C', 'D'],
       }
     },
@@ -485,11 +485,17 @@
         createQuestion: 'createQuestion',
         updateQuestion: 'updateQuestion',
         deleteQuestion: 'deleteQuestion',
+        getAppName: 'getAppName',
       }),
 
       initialize () {
         this.getQuestions().then(res => {
           this.questions = res.data.content.data
+        }).catch(err => {
+          console.log(err)
+        })
+        this.getAppName().then(res => {
+          this.items_app = res.data.content
         }).catch(err => {
           console.log(err)
         })
@@ -504,7 +510,7 @@
 
       Create () {
         this.createQuestion({
-          app_id: this.question.app_name,
+          app_name: this.question.app_name,
           details: this.question.details,
           a: this.question.a,
           b: this.question.b,

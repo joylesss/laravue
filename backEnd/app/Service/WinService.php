@@ -5,6 +5,7 @@ use App\Support\DataTablePaginate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use App\Model\Users;
 use App\Model\Wins;
 
 class WinService {
@@ -33,7 +34,18 @@ class WinService {
 
     public function store(Request $request)
     {
-        //
+        $params     = $request->all();
+        $user_id    = DB::table('users')->select('id')->where('name', $params['user_name'])->first();
+        $app_id     = DB::table('apps')->select('id')->where('name', $params['app_name'])->first();
+
+        $params['app_id'] = $app_id->id ?? '';
+        $params['user_id'] = $user_id->id ?? '';
+        unset(
+            $params['user_name'],
+            $params['app_name']
+        );
+
+        return Wins::create($params);
     }
 
     public function show($id)

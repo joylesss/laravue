@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Wins extends Model
 {
     protected $fillable = [
-        'id', 'user_id', 'prize', 'plan_test'
+        'id', 'user_id', 'app_id', 'prize', 'plan_test'
     ];
 
     protected $hidden   = [];

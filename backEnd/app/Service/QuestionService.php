@@ -34,17 +34,10 @@ class QuestionService {
     public function store(Request $request)
     {
         $params = $request->all();
-        switch ($params['app_id']) {
-            case 'Ai Là Triệu Phú':
-                $params['app_id'] = 1;
-                break;
-            case 'Luyện Nghe Tiếng Anh':
-                $params['app_id'] = 2;
-                break;
-            case 'Nhanh Như Chớp':
-                $params['app_id'] = 3;
-                break;
-        }
+
+        $app_id     = DB::table('apps')->select('id')->where('name', $params['app_name'])->first();
+        $params['app_id'] = $app_id->id ?? '';
+        unset($params['app_name']);
         return Questions::create($params);
     }
 

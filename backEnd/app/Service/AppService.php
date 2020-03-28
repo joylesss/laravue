@@ -24,14 +24,16 @@ class AppService {
         return  $this->dataTablePaginate->scopeDataTablePaginate($query);
     }
 
-    public function create()
+    public function get_name()
     {
-        //
+        $data = DB::table('apps')
+            ->select('name as app_name')->get()->toArray();
+        return array_column($data, 'app_name');
     }
 
     public function store(Request $request)
     {
-        //
+        return Apps::create($request->all());
     }
 
     public function show($id)

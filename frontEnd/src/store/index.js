@@ -76,6 +76,9 @@ export default new Vuex.Store({
     async getUsers () {
       return axios.get('info_users')
     },
+    async getUserName () {
+      return axios.get('get_users/name')
+    },
     async updateUser (_, params) {
       return axios.put('info_users/' + params.id, params)
     },
@@ -85,6 +88,12 @@ export default new Vuex.Store({
 
     async getApps () {
       return axios.get('info_apps')
+    },
+    async getAppName () {
+      return axios.get('get_apps/name')
+    },
+    async createApp (_, params) {
+      return axios.post('info_apps/', params)
     },
     async updateApp (_, params) {
       return axios.put('info_apps/' + params.id, params)
@@ -118,6 +127,9 @@ export default new Vuex.Store({
 
     async getWins () {
       return axios.get('info_wins')
+    },
+    async createWin (_, params) {
+      return axios.post('info_wins/', params)
     },
     async updateWin (_, params) {
       return axios.put('info_wins/' + params.id, params)

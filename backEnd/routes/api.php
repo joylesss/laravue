@@ -7,13 +7,6 @@ Route::group(['namespace' => 'Auth'], function () {
 //    Route::post('login', 'RequestController@updateApp');
 });
 
-Route::namespace('Api')->group(function() {
-    /*Route::resource('info_users', 'UserController');
-    Route::resource('info_apps', 'AppController');
-    Route::resource('info_scores', 'ScoreController');
-    Route::resource('info_questions', 'QuestionController');
-    Route::resource('info_wins', 'WinController');*/
-});
 Route::middleware('jwt')->group(function() {
 
     # Folder Auth
@@ -31,7 +24,8 @@ Route::middleware('jwt')->group(function() {
         Route::resource('info_wins', 'WinController');
 
         # Get every one by id
-//        Route::get('user/edit', '');
+        Route::get('get_users/name', 'UserController@get_name');
+        Route::get('get_apps/name', 'AppController@get_name');
     });
 });
 

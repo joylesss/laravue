@@ -236,6 +236,116 @@
           </v-row>
         </v-container>
       </v-dialog>
+      <v-dialog
+        v-model="dialogCreate"
+        persistent
+        max-width="600px"
+      >
+        <v-container
+          id="user-profile"
+          fluid
+          tag="section"
+        >
+          <v-row justify="center">
+            <v-col
+              cols="12"
+              md="12"
+            >
+              <base-material-card>
+                <template v-slot:heading>
+                  <div class="display-2 font-weight-light">
+                    Tạo mới thông tin người chiến thắng
+                  </div>
+                </template>
+
+                <v-form>
+                  <v-container class="py-0">
+                    <v-row>
+                      <input
+                        v-model="win.id"
+                        type="hidden"
+                        name="id"
+                      >
+                      <v-col
+                        cols="12"
+                        md="6"
+                      >
+                        <v-select
+                          v-model="win.user_name"
+                          :items="items_name"
+                          label="Tên người dùng"
+                          name="app_name"
+                        />
+                      </v-col>
+
+                      <v-col
+                        cols="12"
+                        md="6"
+                      >
+                        <v-select
+                          v-model="win.app_name"
+                          :items="items_app"
+                          label="Tên ứng dụng"
+                          name="app_name"
+                        />
+                      </v-col>
+
+                      <v-col
+                        cols="12"
+                        md="6"
+                      >
+                        <v-text-field
+                          v-model="win.prize"
+                          class="purple-input"
+                          label="Giải thưởng"
+                          name="prize"
+                        />
+                      </v-col>
+
+                      <v-col
+                        cols="12"
+                        md="6"
+                      >
+                        <v-text-field
+                          v-model="win.plan_test"
+                          class="purple-input"
+                          label="Kế hoạch kiểm tra"
+                          name="plan_test"
+                        />
+                      </v-col>
+
+                      <v-col
+                        cols="6"
+                        class="text-left"
+                      >
+                        <v-btn
+                          color="warning"
+                          class="mr-0"
+                          @click="dialogCreate = false"
+                        >
+                          Hủy bỏ
+                        </v-btn>
+                      </v-col>
+                      <v-col
+                        cols="6"
+                        class="text-right"
+                      >
+                        <v-btn
+                          color="success"
+                          class="mr-0 text-right"
+                          @click="Create"
+                        >
+                          Tạo mới
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                </v-form>
+              </base-material-card>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-dialog>
       <div class="">
         <v-bottom-sheet
           v-model="alert"
@@ -288,6 +398,8 @@
           prize: '',
           plan_test: '',
         },
+        items_name: [],
+        items_app: [],
         dialogCreate: false,
         dialogShow: false,
         dialogDelete: false,
@@ -303,8 +415,11 @@
     methods: {
       ...mapActions({
         getWins: 'getWins',
+        createWin: 'createWin',
         updateWin: 'updateWin',
         deleteWin: 'deleteWin',
+        getUserName: 'getUserName',
+        getAppName: 'getAppName',
       }),
 
       initialize () {
@@ -313,8 +428,17 @@
         }).catch(err => {
           console.log(err)
         })
+        this.getUserName().then(res => {
+          this.items_name = res.data.content
+        }).catch(err => {
+          console.log(err)
+        })
+        this.getAppName().then(res => {
+          this.items_app = res.data.content
+        }).catch(err => {
+          console.log(err)
+        })
       },
-
       show (item) {
         this.win.id = item.id
         this.win.user_name = item.user_name
@@ -322,6 +446,22 @@
         this.win.prize = item.prize
         this.win.plan_test = item.plan_test
         this.dialogShow = true
+      },
+      async Create () {
+        this.createWin({
+          user_name: this.win.user_name,
+          app_name: this.win.app_name,
+          prize: this.win.prize,
+          plan_test: this.win.plan_test,
+        }).then(() => {
+          this.dialogCreate = false
+          this.alert = true
+          this.textAlert = 'Tạo mới dữ liệu thành công!'
+
+          this.initialize()
+        }).catch(err => {
+          console.log(err)
+        })
       },
       async Update () {
         this.updateWin({

@@ -22,14 +22,14 @@ class AppController extends Controller
         return $this->respondSuccess($this->appService->index());
     }
 
-    public function create()
+    public function get_name()
     {
-        //
+        return $this->respondSuccess($this->appService->get_name());
     }
 
-    public function store(RequestValidation $request)
+    public function store(Request $request)
     {
-        //
+        return $this->respondSuccess($this->appService->store($request));
     }
 
     public function show($id)

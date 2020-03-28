@@ -24,9 +24,11 @@ class UserService {
         return  $this->dataTablePaginate->scopeDataTablePaginate($query);
     }
 
-    public function create()
+    public function get_name()
     {
-        //
+        $data = DB::table('users')
+            ->select('name as user_name')->get()->toArray();
+        return array_column($data, 'user_name');
     }
 
     public function store(Request $request)

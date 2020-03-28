@@ -17,7 +17,7 @@
               <v-col
                 cols="2"
                 sm="8"
-              ></v-col>
+              />
               <v-col
                 cols="10"
                 sm="4"

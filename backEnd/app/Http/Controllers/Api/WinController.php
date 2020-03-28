@@ -27,9 +27,9 @@ class WinController extends Controller
         //
     }
 
-    public function store(RequestValidation $request)
+    public function store(Request $request)
     {
-        //
+        return $this->respondSuccess($this->winService->store($request));
     }
 
     public function show($id)

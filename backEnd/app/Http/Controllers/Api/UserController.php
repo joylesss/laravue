@@ -18,13 +18,12 @@ class UserController extends Controller
 
     public function index()
     {
-        //
         return $this->respondSuccess($this->userService->index());
     }
 
-    public function create()
+    public function get_name()
     {
-        //
+        return $this->respondSuccess($this->userService->get_name());
     }
 
     /**
