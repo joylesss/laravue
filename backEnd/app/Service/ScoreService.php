@@ -32,9 +32,13 @@ class ScoreService {
         //
     }
 
-    public function store(Request $request)
+    public function store($request)
     {
-        //
+        foreach ($request->all() as $id) {
+            $score = Scores::findOrFail($id);
+            $score->delete();
+        }
+        return true;
     }
 
     public function show($id)

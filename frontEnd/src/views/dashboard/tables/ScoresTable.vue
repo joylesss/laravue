@@ -17,17 +17,30 @@
               <v-col
                 cols="2"
                 sm="8"
-              ></v-col>
+              >
+                <v-btn
+                  class="mx-2"
+                  small
+                  fab
+                  dark
+                  color="error"
+                  @click="dialogDelete = true"
+                >
+                  <v-icon dark>
+                    mdi-trash-can-outline
+                  </v-icon>
+                </v-btn>
+              </v-col>
               <v-col
                 cols="10"
                 sm="4"
+                class="cus-search"
               >
-                <v-text-field
+                <v-select
                   v-model="search"
-                  append-icon="mdi-magnify"
-                  label="Tìm kiếm ..."
-                  single-line
-                  hide-details
+                  :items="search_name"
+                  label="Tìm kiếm"
+                  name="app_name"
                 />
               </v-col>
             </v-row>
@@ -35,16 +48,47 @@
           <v-data-table
             :headers="headers"
             :items="scores"
+            item-key="id"
             :search="search"
           >
-            <template v-slot:item.action="{ item }">
+            <template v-slot:body="{ items }">
+              <tbody>
+              <tr
+                v-for="item in items"
+                :key="item.id"
+              >
+                <td>
+                  <v-checkbox
+                    v-model="selected"
+                    :value="item.id"
+                    hide-details
+                    align="center"
+                  />
+                </td>
+                <td align="center">{{ item.id }}</td>
+                <td>{{ item.user_name }}</td>
+                <td>{{ item.app_name }}</td>
+                <td>{{ item.point }}</td>
+                <td>{{ item.play_times }}</td>
+                <td>
+                  <v-icon
+                    small
+                    class="mr-2"
+                    @click="show( item )"
+                    v-text="'$vuetify.icons.playlistEdit'"
+                  />
+                </td>
+              </tr>
+              </tbody>
+            </template>
+            <!--<template v-slot:item.action="{ item }">
               <v-icon
                 small
                 class="mr-2"
                 @click="show( item )"
                 v-text="'$vuetify.icons.playlistEdit'"
               />
-            </template>
+            </template>-->
           </v-data-table>
         </v-card>
       </v-container>
@@ -180,6 +224,61 @@
         </v-bottom-sheet>
       </div>
     </div>
+    <v-dialog
+      v-model="dialogDelete"
+      persistent
+      max-width="480px"
+    >
+      <v-container
+        id="confirmDelete"
+        fluid
+        tag="section"
+      >
+        <v-row justify="center">
+          <v-col
+            cols="12"
+            md="12"
+          >
+            <base-material-card
+              icon="mdi-alert"
+              title="Dữ liệu sau khi xóa sẽ không được phục hồi!"
+              class="px-5 py-3 text-center"
+              color="error"
+            />
+            <v-container
+              class="py-0 theme--light v-card no-border-radius"
+            >
+              <v-row>
+                <v-col
+                  cols="6"
+                  class="text-left"
+                >
+                  <v-btn
+                    color="warning"
+                    class="mr-0"
+                    @click="dialogDelete = false"
+                  >
+                    Hủy bỏ
+                  </v-btn>
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
+                  <v-btn
+                    color="error"
+                    class="mr-0 text-right"
+                    @click="Delete()"
+                  >
+                    Tiếp tục
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -191,13 +290,10 @@
     data () {
       return {
         search: '',
+        selected: [],
         headers: [
-          {
-            text: '#ID',
-            align: 'center',
-            sortable: false,
-            value: 'id',
-          },
+          { text: '', sortable: false, value: '' },
+          { text: '#ID', align: 'center', sortable: false, value: 'id' },
           { text: 'Tên người dùng', value: 'user_name' },
           { text: 'Tên ứng dụng', value: 'app_name' },
           { text: 'Điểm số', value: 'point' },
@@ -209,8 +305,10 @@
           id: '',
         },
         dialog: false,
+        dialogDelete: false,
         alert: false,
         textAlert: '',
+        search_name: [],
       }
     },
 
@@ -222,6 +320,8 @@
       ...mapActions({
         getScores: 'getScores',
         updateScore: 'updateScore',
+        deleteScore: 'deleteScore',
+        getAppName: 'getAppName',
       }),
 
       initialize () {
@@ -230,6 +330,13 @@
         }).catch(err => {
           console.log(err)
         })
+        this.getAppName().then(res => {
+          const searchName = [''].concat(res.data.content)
+          this.search_name = searchName
+        }).catch(err => {
+          console.log(err)
+        })
+        this.selected = []
       },
 
       show (item) {
@@ -256,7 +363,7 @@
         })
       },
       async Delete () {
-        this.deleteUser(this.user.id).then(res => {
+        this.deleteScore(this.selected).then(res => {
           this.dialogDelete = false
           this.alert = true
           this.textAlert = 'Xóa dữ liệu thành công!'

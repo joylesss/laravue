@@ -27,9 +27,9 @@ class ScoreController extends Controller
         //
     }
 
-    public function store(RequestValidation $request)
+    public function store(Request $request)
     {
-        //
+        return $this->respondSuccess($this->scoreService->store($request));
     }
 
     public function show($id)

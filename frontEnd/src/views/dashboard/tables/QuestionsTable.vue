@@ -34,13 +34,13 @@
               <v-col
                 cols="10"
                 sm="4"
+                class="cus-search"
               >
-                <v-text-field
+                <v-select
                   v-model="search"
-                  append-icon="mdi-magnify"
-                  label="Tìm kiếm ..."
-                  single-line
-                  hide-details
+                  :items="search_mame"
+                  label="Tìm kiếm"
+                  name="app_name"
                 />
               </v-col>
             </v-row>
@@ -471,6 +471,7 @@
         alert: false,
         textAlert: '',
         items_app: [],
+        search_mame: [],
         items_answer: ['A', 'B', 'C', 'D'],
       }
     },
@@ -495,6 +496,8 @@
           console.log(err)
         })
         this.getAppName().then(res => {
+          const searchName = [''].concat(res.data.content)
+          this.search_mame = searchName
           this.items_app = res.data.content
         }).catch(err => {
           console.log(err)
