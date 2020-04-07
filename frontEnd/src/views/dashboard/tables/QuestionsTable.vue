@@ -16,7 +16,7 @@
             <v-row>
               <v-col
                 cols="2"
-                sm="8"
+                sm="1"
               >
                 <v-btn
                   class="mx-2"
@@ -32,16 +32,26 @@
                 </v-btn>
               </v-col>
               <v-col
+                cols="2"
+                sm="4"
+              >
+                <v-select
+                  v-model="search"
+                  :items="search_name"
+                  label="Tìm kiếm theo tên App"
+                  name="app_name"
+                />
+              </v-col>
+              <v-col
+                cols="10"
+                sm="3"
+              >
+              </v-col>
+              <v-col
                 cols="10"
                 sm="4"
                 class="cus-search"
               >
-                <v-select
-                  v-model="search"
-                  :items="search_mame"
-                  label="Tìm kiếm"
-                  name="app_name"
-                />
               </v-col>
             </v-row>
           </v-card-title>
@@ -471,7 +481,7 @@
         alert: false,
         textAlert: '',
         items_app: [],
-        search_mame: [],
+        search_name: [],
         items_answer: ['A', 'B', 'C', 'D'],
       }
     },
@@ -497,7 +507,7 @@
         })
         this.getAppName().then(res => {
           const searchName = [''].concat(res.data.content)
-          this.search_mame = searchName
+          this.search_name = searchName
           this.items_app = res.data.content
         }).catch(err => {
           console.log(err)

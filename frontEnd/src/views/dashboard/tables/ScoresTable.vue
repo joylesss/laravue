@@ -16,7 +16,7 @@
             <v-row>
               <v-col
                 cols="2"
-                sm="8"
+                sm="1"
               >
                 <v-btn
                   class="mx-2"
@@ -32,16 +32,26 @@
                 </v-btn>
               </v-col>
               <v-col
-                cols="10"
+                cols="2"
                 sm="4"
-                class="cus-search"
               >
                 <v-select
                   v-model="search"
                   :items="search_name"
-                  label="Tìm kiếm"
+                  label="Tìm kiếm theo tên App"
                   name="app_name"
                 />
+              </v-col>
+              <v-col
+                cols="10"
+                sm="3"
+              >
+              </v-col>
+              <v-col
+                cols="10"
+                sm="4"
+                class="cus-search"
+              >
               </v-col>
             </v-row>
           </v-card-title>
