@@ -33,6 +33,24 @@
               </v-col>
               <v-col
                 cols="2"
+                sm="1"
+              >
+                <v-btn
+                  v-show="show_notify === true"
+                  class="mx-2"
+                  small
+                  fab
+                  dark
+                  color="blue"
+                  @click="dialogNotify = true"
+                >
+                  <v-icon dark>
+                    mdi-bell-outline
+                  </v-icon>
+                </v-btn>
+              </v-col>
+              <v-col
+                cols="2"
                 sm="4"
               >
                 <v-select
@@ -40,19 +58,18 @@
                   :items="search_name"
                   label="Tìm kiếm theo tên App"
                   name="app_name"
+                  @change="select_value"
                 />
               </v-col>
               <v-col
-                cols="10"
-                sm="3"
-              >
-              </v-col>
+                cols="8"
+                sm="2"
+              />
               <v-col
                 cols="10"
                 sm="4"
                 class="cus-search"
-              >
-              </v-col>
+              />
             </v-row>
           </v-card-title>
           <v-data-table
@@ -63,32 +80,34 @@
           >
             <template v-slot:body="{ items }">
               <tbody>
-              <tr
-                v-for="item in items"
-                :key="item.id"
-              >
-                <td>
-                  <v-checkbox
-                    v-model="selected"
-                    :value="item.id"
-                    hide-details
-                    align="center"
-                  />
-                </td>
-                <td align="center">{{ item.id }}</td>
-                <td>{{ item.user_name }}</td>
-                <td>{{ item.app_name }}</td>
-                <td>{{ item.point }}</td>
-                <td>{{ item.play_times }}</td>
-                <td>
-                  <v-icon
-                    small
-                    class="mr-2"
-                    @click="show( item )"
-                    v-text="'$vuetify.icons.playlistEdit'"
-                  />
-                </td>
-              </tr>
+                <tr
+                  v-for="item in items"
+                  :key="item.id"
+                >
+                  <td>
+                    <v-checkbox
+                      v-model="selected"
+                      :value="item.id"
+                      hide-details
+                      align="center"
+                    />
+                  </td>
+                  <td align="center">
+                    {{ item.id }}
+                  </td>
+                  <td>{{ item.user_name }}</td>
+                  <td>{{ item.app_name }}</td>
+                  <td>{{ item.point }}</td>
+                  <td>{{ item.play_times }}</td>
+                  <td>
+                    <v-icon
+                      small
+                      class="mr-2"
+                      @click="show( item )"
+                      v-text="'$vuetify.icons.playlistEdit'"
+                    />
+                  </td>
+                </tr>
               </tbody>
             </template>
             <!--<template v-slot:item.action="{ item }">
@@ -289,6 +308,77 @@
         </v-row>
       </v-container>
     </v-dialog>
+    <v-dialog
+      v-model="dialogNotify"
+      persistent
+      max-width="480px"
+    >
+      <v-container
+        id="confirmDelete"
+        fluid
+        tag="section"
+      >
+        <v-row justify="center">
+          <v-col
+            cols="12"
+            md="12"
+          >
+            <base-material-card
+              icon="mdi-bell-ring"
+              title=""
+              class="px-5 py-3 text-center"
+              color="blue"
+            >
+              <v-col
+                cols="12"
+                md="12"
+              >
+                <input
+                  type="hidden"
+                  name="app_name"
+                  value=""
+                >
+                <v-text-field
+                  v-model="score.notify"
+                  label="Nhập nội dung thông báo!"
+                  name="notify"
+                />
+              </v-col>
+            </base-material-card>
+            <v-container
+              class="py-0 theme--light v-card no-border-radius"
+            >
+              <v-row>
+                <v-col
+                  cols="6"
+                  class="text-left"
+                >
+                  <v-btn
+                    color="warning"
+                    class="mr-0"
+                    @click="dialogNotify = false"
+                  >
+                    Hủy bỏ
+                  </v-btn>
+                </v-col>
+                <v-col
+                  cols="6"
+                  class="text-right"
+                >
+                  <v-btn
+                    color="primary"
+                    class="mr-0 text-right"
+                    @click="Notify()"
+                  >
+                    Tiếp tục
+                  </v-btn>
+                </v-col>
+              </v-row>
+            </v-container>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -313,12 +403,16 @@
         scores: [],
         score: {
           id: '',
+          notify: '',
         },
         dialog: false,
         dialogDelete: false,
+        dialogNotify: false,
         alert: false,
         textAlert: '',
         search_name: [],
+        show_notify: '',
+        name_notify: '',
       }
     },
 
@@ -332,11 +426,12 @@
         updateScore: 'updateScore',
         deleteScore: 'deleteScore',
         getAppName: 'getAppName',
+        pushNotify: 'pushNotify',
       }),
 
       initialize () {
         this.getScores().then(res => {
-          this.scores = res.data.content.data
+          this.scores = res.data.content
         }).catch(err => {
           console.log(err)
         })
@@ -382,6 +477,30 @@
         }).catch(err => {
           console.log(err)
         })
+      },
+      async Notify () {
+        this.pushNotify({
+          ids: this.selected,
+          notify: this.score.notify,
+          app_name: this.name_notify,
+        }).then(res => {
+          this.dialogNotify = false
+          this.alert = true
+          this.textAlert = 'Thông báo thành công!'
+
+          this.score.notify = ''
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      async select_value (item) {
+        if (item) {
+          this.show_notify = true
+          this.name_notify = item
+        } else {
+          this.show_notify = false
+          this.name_notify = null
+        }
       },
     },
 

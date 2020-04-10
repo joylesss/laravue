@@ -19,10 +19,11 @@ class WinService {
 
     public function index()
     {
-        $query = DB::table('wins')
+        return DB::table('wins')
             ->leftJoin('users', 'wins.user_id', '=', 'users.id')
             ->leftJoin('apps', 'wins.app_id', '=', 'apps.id')
-            ->select('wins.id', 'users.name as user_name', 'apps.name as app_name', 'wins.prize', 'wins.plan_test');
+            ->select('wins.id', 'users.name as user_name', 'apps.name as app_name', 'wins.prize', 'wins.plan_test')
+            ->get()->toArray();
 
         return $this->dataTablePaginate->scopeDataTablePaginate($query);
     }

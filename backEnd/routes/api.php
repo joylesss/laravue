@@ -3,10 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['namespace' => 'Auth'], function () {
-//    Route::post('login', 'RequestController@updateApp');
-});
-
 Route::middleware('jwt')->group(function() {
 
     # Folder Auth
@@ -26,6 +22,9 @@ Route::middleware('jwt')->group(function() {
         # Get every one by id
         Route::get('get_users/name', 'UserController@get_name');
         Route::get('get_apps/name', 'AppController@get_name');
+
+        # Push notify
+        Route::resource('push_notify', 'NotifyController');
     });
 });
 

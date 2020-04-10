@@ -122,8 +122,10 @@ export default new Vuex.Store({
       return axios.put('info_scores/' + params.id, params)
     },
     async deleteScore (_, params) {
-      console.log(params)
       return axios.post('info_scores', params)
+    },
+    async pushNotify (_, params) {
+      return axios.post('push_notify', params)
     },
 
     async getWins () {

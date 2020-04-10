@@ -501,7 +501,7 @@
 
       initialize () {
         this.getQuestions().then(res => {
-          this.questions = res.data.content.data
+          this.questions = res.data.content
         }).catch(err => {
           console.log(err)
         })

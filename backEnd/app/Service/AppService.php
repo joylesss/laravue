@@ -18,8 +18,9 @@ class AppService {
 
     public function index()
     {
-        $query = DB::table('apps')
-            ->select('id', 'name as app_name', 'version_ios', 'version_android', 'prize', 'plan_test', 'plan_show_win');
+        return DB::table('apps')
+            ->select('id', 'name as app_name', 'version_ios', 'version_android', 'prize', 'plan_test', 'plan_show_win')
+            ->get()->toArray();
 
         return  $this->dataTablePaginate->scopeDataTablePaginate($query);
     }

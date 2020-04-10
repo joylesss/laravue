@@ -1,5 +1,6 @@
 <?php
 
+
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
@@ -26,9 +27,6 @@ class UserController extends Controller
         return $this->respondSuccess($this->userService->get_name());
     }
 
-    /**
-     * @param Request $request
-     */
     public function store(Request $request)
     {
         //

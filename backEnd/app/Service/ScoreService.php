@@ -19,10 +19,11 @@ class ScoreService {
 
     public function index()
     {
-        $query = DB::table('scores')
+        return DB::table('scores')
             ->leftJoin('users', 'scores.user_id', '=', 'users.id')
             ->leftJoin('apps', 'scores.app_id', '=', 'apps.id')
-            ->select('scores.id', 'users.name as user_name', 'apps.name as app_name', 'scores.point', 'scores.play_times');
+            ->select('scores.id', 'users.name as user_name', 'apps.name as app_name', 'scores.point', 'scores.play_times')
+            ->get()->toArray();
 
         return $this->dataTablePaginate->scopeDataTablePaginate($query);
     }

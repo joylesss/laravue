@@ -293,7 +293,7 @@
 
       initialize () {
         this.getUsers().then(res => {
-          this.users = res.data.content.data
+          this.users = res.data.content
         }).catch(err => {
           console.log(err)
         })

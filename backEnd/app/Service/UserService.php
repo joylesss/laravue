@@ -18,8 +18,9 @@ class UserService {
 
     public function index()
     {
-        $query = DB::table('users')
-            ->select('id', 'name as user_name', 'phone', 'fb_id', 'fb_email');
+        return DB::table('users')
+            ->select('id', 'name as user_name', 'phone', 'fb_id', 'fb_email')
+            ->get()->toArray();
 
         return  $this->dataTablePaginate->scopeDataTablePaginate($query);
     }

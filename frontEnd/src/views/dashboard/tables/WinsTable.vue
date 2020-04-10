@@ -424,7 +424,7 @@
 
       initialize () {
         this.getWins().then(res => {
-          this.wins = res.data.content.data
+          this.wins = res.data.content
         }).catch(err => {
           console.log(err)
         })

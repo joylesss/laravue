@@ -471,7 +471,7 @@
 
       initialize () {
         this.getApps().then(res => {
-          this.apps = res.data.content.data
+          this.apps = res.data.content
         }).catch(err => {
           console.log(err)
         })

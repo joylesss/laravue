@@ -18,10 +18,11 @@ class QuestionService {
 
     public function index()
     {
-        $query = DB::table('questions')
+        return DB::table('questions')
             ->leftJoin('apps', 'questions.app_id', '=', 'apps.id')
             ->where('questions.app_id', '!=', '')
-            ->select('questions.id', 'apps.name as app_name', 'questions.details', 'questions.a', 'questions.b', 'questions.c', 'questions.d', 'questions.answer');
+            ->select('questions.id', 'apps.name as app_name', 'questions.details', 'questions.a', 'questions.b', 'questions.c', 'questions.d', 'questions.answer')
+            ->get()->toArray();
 
         return $this->dataTablePaginate->scopeDataTablePaginate($query);
     }
