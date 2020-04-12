@@ -21,7 +21,7 @@ class NotifyService {
                 break;
             case 'Luyện nghe Tiếng Anh':
                 $instanceId = env('INSTANCE_ID_ENGLISH');
-                $secretKey = env('E1E1143FF276F44524D7313221EFA600BAB9AA35F5638EF55B2E5389F60087A2');
+                $secretKey = env('SECRET_KEY_ENGLISH');
                 break;
 
             default:
