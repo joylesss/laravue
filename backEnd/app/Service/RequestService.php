@@ -199,7 +199,9 @@ class RequestService {
             ->select('fb_id',
                 'users.name as user_name',
                 'apps.name as user_app',
-                'scores.point')
+                'scores.point',
+                'scores.updated_at',
+                'scores.play_times')
             ->leftJoin('users', function($join) {
                 $join->on('scores.user_id', '=', 'users.id');
             })
@@ -212,9 +214,10 @@ class RequestService {
 
     public function infoResult($params)
     {
-        $app_id = $params['app_id'] ?? '';
-        $fb_id  = $params['fb_id'] ?? '';
-        $score  = $params['score'] ?? '';
+        $app_id     = $params['app_id'] ?? '';
+        $fb_id      = $params['fb_id'] ?? '';
+        $score      = $params['score'] ?? '';
+        $play_times = $params['play_times'] ?? '';
 
         $user_id    = DB::table('users')->select('users.id')->where('users.fb_id', '=', $fb_id)->get()->toArray()[0]->id ?? '';
         $res_core   = DB::table('scores')
@@ -247,6 +250,8 @@ class RequestService {
                 'user_id'   => $user_id,
                 'app_id'    => $app_id,
                 'point'     => $max_score,
+                'play_times'=> $play_times,
+                'updated_at'=> date('Y-m-d H:i:s'),
             ];
             $data->update($input);
         } else {
@@ -254,6 +259,7 @@ class RequestService {
                 'user_id'   => $user_id,
                 'app_id'    => $app_id,
                 'point'     => $score,
+                'play_times'=> $play_times,
             ];
             Scores::create($input);
         }
