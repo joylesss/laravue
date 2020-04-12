@@ -126,67 +126,73 @@
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.details"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Câu hỏi"
                           name="details"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.a"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Đáp án A"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.b"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Đáp án B"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.c"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Đáp án C"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.d"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Đáp án D"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.answer"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Câu trả lời"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
@@ -317,72 +323,78 @@
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.details"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Câu hỏi"
                           name="details"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.a"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Đáp án A"
                           name="a"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.b"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Đáp án B"
                           name="b"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.c"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Đáp án C"
                           name="c"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-text-field
+                        <v-textarea
                           v-model="question.d"
-                          class="purple-input"
+                          outlined
+                          rows="4"
                           label="Đáp án D"
                           name="d"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
                         cols="12"
                         md="6"
                       >
-                        <v-select
+                        <v-textarea
                           v-model="question.answer"
-                          :items="items_answer"
+                          outlined
+                          rows="4"
                           label="Câu trả lời"
                           name="answer"
-                        />
+                        ></v-textarea>
                       </v-col>
 
                       <v-col
