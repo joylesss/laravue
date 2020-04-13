@@ -29,8 +29,8 @@ class NotifyService {
         }
 
         $beamsClient = new \Pusher\PushNotifications\PushNotifications(array(
-            "instanceId"    => $instanceId,
-            "secretKey"     => $secretKey,
+            "instanceId" => $instanceId,
+            "secretKey" => $secretKey,
         ));
 
         $users = [];

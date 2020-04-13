@@ -214,10 +214,10 @@ class RequestService {
 
     public function infoResult($params)
     {
-        $app_id     = $params['app_id'] ?? '';
-        $fb_id      = $params['fb_id'] ?? '';
-        $score      = $params['score'] ?? '';
-        $play_times = $params['play_times'] ?? '';
+        $app_id     = !empty($params['app_id']) ? $params['app_id'] : 0;
+        $fb_id      = !empty($params['fb_id']) ? $params['fb_id'] : 0;
+        $score      = !empty($params['score']) ? $params['score'] : 0;
+        $play_times = !empty($params['play_times']) ? $params['play_times'] : 0;
 
         $user_id    = DB::table('users')->select('users.id')->where('users.fb_id', '=', $fb_id)->get()->toArray()[0]->id ?? '';
         $res_core   = DB::table('scores')
