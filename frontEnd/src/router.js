@@ -8,7 +8,7 @@ export default new Router({
   mode: 'hash',
   base: process.env.BASE_URL,
   routes: [
-     /* {
+      {
       path: '/',
       name: 'Home',
       component: () => import('@/views/home/Index'),
@@ -19,7 +19,7 @@ export default new Router({
            component: () => import('@/views/home/Dashboard'),
          },
        ],
-    }, */
+    },
     {
       path: '/admin',
       name: 'Admin',

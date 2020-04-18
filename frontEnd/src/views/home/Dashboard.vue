@@ -1,138 +1,46 @@
 <template>
-  <div class="back-ground-img">
-    <v-parallax
-      height="100%"
-      :src="require('@/assets/1.png')"
+  <v-carousel
+    class="cus-carousel"
+    cycle
+    height="100%"
+    hide-delimiter-background
+    show-arrows-on-hover
+    show-arrows="false"
+  >
+    <v-carousel-item
+      v-for="(slide, i) in slides"
+      :key="i"
     >
-      <v-container>
-        <v-row>
-          <v-col
-            cols="12"
-            sm="2"
-            lg="2"
-            class="text-center"
-          >
-            <v-row
-              class=""
-            >
-              <v-col class="px-0">
-                <v-img
-                  class="text-img-center"
-                  width="288"
-                  :src="require('@/assets/app_ios.png')"
-                />
-              </v-col>
-
-              <v-col class="px-0">
-                <v-img
-                  class="text-img-center"
-                  width="288"
-                  :src="require('@/assets/app_android.png')"
-                />
-              </v-col>
-
-              <v-col class="px-0">
-                <v-img
-                  class="text-img-center"
-                  width="288"
-                  :src="require('@/assets/code.png')"
-                />
-              </v-col>
-
-              <v-col class="px-0">
-                <v-img
-                  class="text-img-center"
-                  width="288"
-                  :src="require('@/assets/millionaire.png')"
-                />
-              </v-col>
-            </v-row>
-          </v-col>
-          <v-col
-            cols="12"
-            sm="4"
-            lg="4"
-          >
-            <v-img
-              class="text-img-center"
-              width="288"
-              height="567"
-              :src="require('@/assets/phone.png')"
-            />
-          </v-col>
-
-          <v-col
-            cols="12"
-            sm="4"
-            lg="4"
-          >
-            <v-img
-              class="text-img-center"
-              width="288"
-              height="567"
-              :src="require('@/assets/phone.png')"
-            />
-          </v-col>
-          <v-col
-            cols="12"
-            sm="2"
-            lg="2"
-            class="text-center"
-          >
-            <v-row
-              class=""
-            >
-              <v-col class="px-0">
-                <v-img
-                  class="text-img-center"
-                  width="288"
-                  :src="require('@/assets/app_ios.png')"
-                />
-              </v-col>
-
-              <v-col class="px-0">
-                <v-img
-                  class="text-img-center"
-                  width="288"
-                  :src="require('@/assets/app_android.png')"
-                />
-              </v-col>
-
-              <v-col class="px-0">
-                <v-img
-                  class="text-img-center"
-                  width="288"
-                  :src="require('@/assets/code.png')"
-                />
-              </v-col>
-
-              <v-col class="px-0">
-                <v-img
-                  class="text-img-center"
-                  width="288"
-                  :src="require('@/assets/millionaire.png')"
-                />
-              </v-col>
-            </v-row>
-          </v-col>
+      <v-sheet
+        :color="colors[i]"
+        height="100%"
+      >
+        <v-row
+          class="fill-height"
+          align="center"
+          justify="center"
+        >
+          <v-img
+            class="text-img-center"
+            :src="require('@/assets/thanhtienganh.png')"
+          />
         </v-row>
-      </v-container>
-    </v-parallax>
-  </div>
+      </v-sheet>
+    </v-carousel-item>
+  </v-carousel>
 </template>
 
 <script>
   export default {
-    name: 'DashboardDashboard',
-
     data () {
-      return {}
-    },
-
-    methods: {
-      complete (index) {
-        this.list[index] = !this.list[index]
-      },
+      return {
+        colors: [
+          'white',
+        ],
+        slides: [
+          'First',
+        ],
+      }
     },
   }
 </script>
