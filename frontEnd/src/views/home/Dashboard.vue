@@ -28,14 +28,17 @@
             class="link-app"
             target="blank"
             href="https://apps.apple.com/us/app/th%C3%A1nh-nghe-ti%E1%BA%BFng-anh/id1504696758?ls=1&fbclid=IwAR3c3UEtRMMOnlugvrzplQWaib832IuDkNRn53bOhbHKtpJ8ytzzTSoG7FI"
-          >
-          </a>
+          />
+          <a
+            class="link-fb link-admin"
+            target="blank"
+            href="http://giaithuong.top"
+          />
           <a
             class="link-fb"
             target="blank"
             href="https://www.facebook.com/hocchoivuicothuong"
-          >
-          </a>
+          />
         </v-row>
       </v-sheet>
     </v-carousel-item>
