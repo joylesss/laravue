@@ -32,7 +32,7 @@
           <a
             class="link-fb link-admin"
             target="blank"
-            href="http://giaithuong.top"
+            href="http://giaithuong.top/#/admin"
           />
           <a
             class="link-fb"
