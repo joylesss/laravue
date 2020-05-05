@@ -25,6 +25,9 @@ Route::middleware('jwt')->group(function() {
 
         # Push notify
         Route::resource('push_notify', 'NotifyController');
+
+        # Import
+        Route::post('import/questions', 'QuestionController@import');
     });
 });
 

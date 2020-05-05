@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Service\QuestionService;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Import\ImportQuestions;
 
 class QuestionController extends Controller
 {
@@ -50,6 +52,15 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         return $this->respondSuccess($this->questionService->destroy($id));
+    }
+
+    /**
+     *
+     */
+    public function import()
+    {
+        Excel::import(new ImportQuestions, request()->file('files'));
+        return back();
     }
 
 }
