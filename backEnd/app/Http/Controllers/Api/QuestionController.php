@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Service\QuestionService;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Export\ExportQuestions;
 use App\Import\ImportQuestions;
 
 class QuestionController extends Controller
@@ -54,13 +55,20 @@ class QuestionController extends Controller
         return $this->respondSuccess($this->questionService->destroy($id));
     }
 
-    /**
-     *
-     */
+
+    public function exportTemplate()
+    {
+        return view('Template_default');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ExportQuestions, 'questions.xlsx');
+    }
+
     public function import()
     {
-        Excel::import(new ImportQuestions, request()->file('files'));
-        return back();
+        return $this->respondSuccess(Excel::import(new ImportQuestions, request()->file('files')));
     }
 
 }

@@ -44,14 +44,43 @@
               </v-col>
               <v-col
                 cols="10"
-                sm="3"
+                sm="2"
               >
+                <v-btn
+                  @click="Exports"
+                >
+                  Export
+                </v-btn>
               </v-col>
               <v-col
                 cols="10"
-                sm="4"
+                sm="2"
                 class="cus-search"
               >
+                <v-btn
+                  @click="exportTemplate"
+                >
+                  Export Template
+                </v-btn>
+              </v-col>
+              <v-col
+                cols="10"
+                sm="2"
+                class="cus-search"
+              >
+                <v-form>
+                  <v-text-field
+                    v-model="question.file"
+                    type="file"
+                    class="purple-input"
+                    name="file"
+                  />
+                  <v-btn
+                    @click="imports"
+                  >
+                    Import
+                  </v-btn>
+                </v-form>
               </v-col>
             </v-row>
           </v-card-title>
@@ -132,7 +161,7 @@
                           rows="4"
                           label="Câu hỏi"
                           name="details"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -144,7 +173,7 @@
                           outlined
                           rows="4"
                           label="Đáp án A"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -156,7 +185,7 @@
                           outlined
                           rows="4"
                           label="Đáp án B"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -168,7 +197,7 @@
                           outlined
                           rows="4"
                           label="Đáp án C"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -180,7 +209,7 @@
                           outlined
                           rows="4"
                           label="Đáp án D"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -192,7 +221,7 @@
                           outlined
                           rows="4"
                           label="Câu trả lời"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -329,7 +358,7 @@
                           rows="4"
                           label="Câu hỏi"
                           name="details"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -342,7 +371,7 @@
                           rows="4"
                           label="Đáp án A"
                           name="a"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -355,7 +384,7 @@
                           rows="4"
                           label="Đáp án B"
                           name="b"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -368,7 +397,7 @@
                           rows="4"
                           label="Đáp án C"
                           name="c"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -381,7 +410,7 @@
                           rows="4"
                           label="Đáp án D"
                           name="d"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -394,7 +423,7 @@
                           rows="4"
                           label="Câu trả lời"
                           name="answer"
-                        ></v-textarea>
+                        />
                       </v-col>
 
                       <v-col
@@ -486,6 +515,7 @@
           c: '',
           d: '',
           answer: '',
+          file: '',
         },
         dialogCreate: false,
         dialog: false,
@@ -509,6 +539,9 @@
         updateQuestion: 'updateQuestion',
         deleteQuestion: 'deleteQuestion',
         getAppName: 'getAppName',
+        exportTemplateQuestions: 'exportTemplateQuestions',
+        exportQuestions: 'exportQuestions',
+        importQuestions: 'importQuestions',
       }),
 
       initialize () {
@@ -597,6 +630,27 @@
         }).catch(err => {
           console.log(err)
         })
+      },
+      async exportTemplate () {
+        this.exportTemplateQuestions().then(res => {
+          console.log(res)
+          this.alert = true
+          this.textAlert = 'Xuất liệu thành công!'
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      async Exports () {
+        this.exportQuestions().then(res => {
+          console.log(res)
+          this.alert = true
+          this.textAlert = 'Xuất liệu thành công!'
+        }).catch(err => {
+          console.log(err)
+        })
+      },
+      async imports () {
+        console.log(this.question.file)
       },
     },
 

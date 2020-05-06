@@ -2,6 +2,7 @@
 
 namespace App\Import;
 
+use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
@@ -16,6 +17,18 @@ class ImportQuestions implements ToModel, WithHeadingRow
      */
     public function model(array $row)
     {
+        # Search data isset
+        $data_update = DB::table('questions')
+            ->where('questions.app_id', '=', $row['id_app'])
+            ->where('questions.details', '=', $row['question'])
+            ->select('questions.id')
+            ->first();
+        # It has delete data old
+        if ($data_update) {
+            $question = Questions::findOrFail($data_update->id);
+            $question->delete();
+        }
+
         return new Questions([
             'app_id'    => $row['id_app'],
             'details'   => $row['question'],

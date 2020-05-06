@@ -26,6 +26,10 @@ Route::middleware('jwt')->group(function() {
         # Push notify
         Route::resource('push_notify', 'NotifyController');
 
+        # Import Export
+        Route::get('export/template_questions', 'QuestionController@exportTemplate');
+        # Export all
+        Route::get('export/questions', 'QuestionController@export');
         # Import
         Route::post('import/questions', 'QuestionController@import');
     });

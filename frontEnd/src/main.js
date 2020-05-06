@@ -10,8 +10,8 @@ import i18n from './i18n'
 import axios from 'axios'
 
 require('./store/subscriber.js')
-axios.defaults.baseURL = 'http://103.249.100.40:81/api'
-// axios.defaults.baseURL = 'http://localhost:8000/api'
+// axios.defaults.baseURL = 'http://103.249.100.40:81/api'
+axios.defaults.baseURL = 'http://localhost:8000/api'
 
 Vue.config.productionTip = false
 

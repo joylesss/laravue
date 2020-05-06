@@ -114,6 +114,12 @@ export default new Vuex.Store({
     async deleteQuestion (_, id) {
       return axios.delete('info_questions/' + id)
     },
+    async exportTemplateQuestions () {
+      return axios.get('export/template_questions')
+    },
+    async exportQuestions () {
+      return axios.get('export/questions')
+    },
 
     async getScores () {
       return axios.get('info_scores')
