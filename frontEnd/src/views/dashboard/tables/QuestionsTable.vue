@@ -42,7 +42,7 @@
                   name="app_name"
                 />
               </v-col>
-              <v-col
+              <!--<v-col
                 cols="10"
                 sm="2"
               >
@@ -51,7 +51,7 @@
                 >
                   Export
                 </v-btn>
-              </v-col>
+              </v-col>-->
               <v-col
                 cols="10"
                 sm="2"
@@ -68,19 +68,23 @@
                 sm="2"
                 class="cus-search"
               >
-                <v-form>
-                  <v-text-field
-                    v-model="question.file"
-                    type="file"
-                    class="purple-input"
-                    name="file"
-                  />
-                  <v-btn
-                    @click="imports"
-                  >
-                    Import
-                  </v-btn>
-                </v-form>
+                <input
+                  id="files"
+                  ref="files"
+                  type="file"
+                  multiple
+                  @change="handleFilesUpload()"
+                >
+              </v-col>
+              <v-col
+                cols="10"
+                sm="2"
+              >
+                <v-btn
+                  @click="submitFiles()"
+                >
+                  Export
+                </v-btn>
               </v-col>
             </v-row>
           </v-card-title>
@@ -482,6 +486,7 @@
 </template>
 <script>
   import { mapActions } from 'vuex'
+  // import axios from 'axios'
   export default {
     name: 'Questions',
     components: {},
@@ -515,7 +520,6 @@
           c: '',
           d: '',
           answer: '',
-          file: '',
         },
         dialogCreate: false,
         dialog: false,
@@ -525,6 +529,7 @@
         items_app: [],
         search_name: [],
         items_answer: ['A', 'B', 'C', 'D'],
+        files: '',
       }
     },
 
@@ -649,8 +654,29 @@
           console.log(err)
         })
       },
-      async imports () {
-        console.log(this.question.file)
+      handleFilesUpload () {
+        this.files = this.$refs.files.files
+        console.log(this.files)
+        for (var i = 0; i < this.files.length; i++) {
+          this.files.push(this.files[i])
+        }
+        // console.log(this.files)
+      },
+      submitFiles () {
+        const formData = new FormData()
+        for (var i = 0; i < this.files.length; i++) {
+          const file = this.files[i]
+
+          formData.append('file[' + i + ']', file)
+        }
+        console.log(formData)
+        console.log(this.files)
+
+        /* this.importQuestions(this.files).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.log(err)
+        }) */
       },
     },
 

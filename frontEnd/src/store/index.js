@@ -120,6 +120,9 @@ export default new Vuex.Store({
     async exportQuestions () {
       return axios.get('export/questions')
     },
+    async importQuestions (_, params) {
+      return axios.post('import/questions', params)
+    },
 
     async getScores () {
       return axios.get('info_scores')

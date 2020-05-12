@@ -68,7 +68,7 @@ class QuestionController extends Controller
 
     public function import()
     {
-        return $this->respondSuccess(Excel::import(new ImportQuestions, request()->file('files')));
+        return $this->respondSuccess(Excel::import(new ImportQuestions, request()->file('file')));
     }
 
 }
