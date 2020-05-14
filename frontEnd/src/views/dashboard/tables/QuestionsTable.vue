@@ -69,11 +69,8 @@
                 class="cus-search"
               >
                 <input
-                  id="files"
-                  ref="files"
                   type="file"
-                  multiple
-                  @change="handleFilesUpload()"
+                  @change="handleFilesUpload"
                 >
               </v-col>
               <v-col
@@ -81,7 +78,7 @@
                 sm="2"
               >
                 <v-btn
-                  @click="submitFiles()"
+                  @click="submitFiles"
                 >
                   Export
                 </v-btn>
@@ -529,7 +526,7 @@
         items_app: [],
         search_name: [],
         items_answer: ['A', 'B', 'C', 'D'],
-        files: '',
+        image: '',
       }
     },
 
@@ -654,29 +651,25 @@
           console.log(err)
         })
       },
-      handleFilesUpload () {
-        this.files = this.$refs.files.files
-        console.log(this.files)
-        for (var i = 0; i < this.files.length; i++) {
-          this.files.push(this.files[i])
+      handleFilesUpload (e) {
+        const files = e.target.files || e.dataTransfer.files
+        if (!files.length) { return }
+        this.createImage(files[0])
+      },
+      createImage (file) {
+        const reader = new FileReader()
+        const vm = this
+        reader.onload = (e) => {
+          vm.image = e.target.result
         }
-        // console.log(this.files)
+        reader.readAsDataURL(file)
       },
       submitFiles () {
-        const formData = new FormData()
-        for (var i = 0; i < this.files.length; i++) {
-          const file = this.files[i]
-
-          formData.append('file[' + i + ']', file)
-        }
-        console.log(formData)
-        console.log(this.files)
-
-        /* this.importQuestions(this.files).then(res => {
+        this.importQuestions(this.image).then(res => {
           console.log(res)
         }).catch(err => {
           console.log(err)
-        }) */
+        })
       },
     },
 

@@ -66,8 +66,9 @@ class QuestionController extends Controller
         return Excel::download(new ExportQuestions, 'questions.xlsx');
     }
 
-    public function import()
+    public function import(Request $request)
     {
+        return ($request->get('image'));
         return $this->respondSuccess(Excel::import(new ImportQuestions, request()->file('file')));
     }
 
