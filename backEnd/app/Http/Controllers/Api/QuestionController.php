@@ -68,7 +68,6 @@ class QuestionController extends Controller
 
     public function import(Request $request)
     {
-        return ($request->get('image'));
         return $this->respondSuccess(Excel::import(new ImportQuestions, request()->file('file')));
     }
 

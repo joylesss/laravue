@@ -52,7 +52,7 @@
                   Export
                 </v-btn>
               </v-col>-->
-              <v-col
+              <!--<v-col
                 cols="10"
                 sm="2"
                 class="cus-search"
@@ -82,7 +82,7 @@
                 >
                   Export
                 </v-btn>
-              </v-col>
+              </v-col>-->
             </v-row>
           </v-card-title>
           <v-data-table
