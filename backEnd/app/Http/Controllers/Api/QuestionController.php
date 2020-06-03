@@ -19,10 +19,10 @@ class QuestionController extends Controller
         $this->questionService = $questionService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         //
-        return $this->respondSuccess($this->questionService->index());
+        return $this->respondSuccess($this->questionService->index($request));
     }
 
     public function create()
